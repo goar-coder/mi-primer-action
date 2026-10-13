@@ -1,32 +1,27 @@
 name: Build Python
 
-# Eventos que disparan el workflow
 on:
   push:
-    branches: [ "main" ]        # Cada vez que se sube código a main
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]        # Cada vez que se abre un PR hacia main
-  workflow_dispatch:            # Permite ejecutarlo manualmente con un botón
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest      # Máquina virtual Linux
+    runs-on: ubuntu-24.04       # Versión fija (opcional; ubuntu-latest también vale)
 
     steps:
-      # 1. Descarga el código del repositorio en la máquina virtual
       - name: Descargar el código
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      # 2. Instala Python
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      # 3. Muestra la versión instalada
       - name: Verificar versión de Python
         run: python --version
 
-      # 4. Ejecuta nuestro script
       - name: Ejecutar main.py
         run: python main.py
