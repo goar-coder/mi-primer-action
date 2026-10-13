@@ -24,4 +24,9 @@ jobs:
         run: python --version
 
       - name: Ejecutar main.py
-        run: python main.py
+        run: |
+          python main.py | tee salida.txt
+          echo "## Salida de main.py" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat salida.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
